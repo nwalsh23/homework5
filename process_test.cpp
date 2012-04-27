@@ -9,14 +9,14 @@
 int main(int argc, char *argv[])
 {
     using namespace std;
-    std::vector<char*> args;
+    std::vector<std::string> args;
 
     for(int nn=1; nn<argc; ++nn)
     {
 	std::cerr << "Arg: " << argv[nn] << std::endl;
 	args.push_back(argv[nn]);
     }
-    args.push_back( NULL );
+
 
     
     string line;

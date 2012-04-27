@@ -5,51 +5,49 @@
 #include <sys/poll.h>
 #include <iostream>
 #include <vector>
+#include <string>
 
-#define	PARENT_READ     m_readpipe[0]
-#define	CHILD_WRITE	m_readpipe[1]
-#define CHILD_READ      m_writepipe[0]
-#define PARENT_WRITE	m_writepipe[1]
+#define PARENT_READ	a_readpipe[0]
+#define CHILD_WRITE	a_readpipe[1]
+#define CHILD_READ	a_writepipe[0]
+#define PARENT_WRITE	a_writepipe[1]
 
 class Process
+
 {
 public:
-    //The extra bool argument can be used to enable verbose messages
-    Process(const std::vector<char*>&, bool verbose);
-    Process(const std::vector<char*>&);
-    
-    // prevent copying and assignment
-    Process(const Process &p);
-    Process& operator=(const Process &p);
+	//copy
+	Process(const Process &p);
+	Process& operator= (const Process &p);
 
-    //Implement a move constructor   
-    Process(Process&& other);
-    Process& operator=(Process&& other);
+	//extra bool argument
+	Process(const std::vector<char*>&, bool verbose=false);
+	
+	//move constructor
+	Process(Process&& other);
+	Process& operator=(Process&& other);
 
-    ~Process();
+	~Process();
 
-    void write(const std::string&);
-    std::string read();
-    int wait();
-    bool stop();
-    bool resume();
-    int status();
+	void write(const std::string&);
+	std:: string read();
+	
+	bool end();
+	bool start();
+	int stat();
+	int wait();
 
 private:
-    bool verbose;
-    std::string m_name;
 
-    //PID of child process
-    pid_t m_pid;
-    int m_status;
+	bool verbose;
+	std::string a_name;
 
-    //File descriptors for writing/reading to/from process
-    int m_writepipe[2];
-    int m_readpipe[2];
+	int a_writepipe[2];
+	int a_readpipe[2];
 
-    //File stream to write/read to/from child process
-    FILE* m_pwrite;
-    FILE* m_pread;
+	pid_b a_pid;
+	int a_stat;
+
+	FILE* a_pwrite;
+	FILE* a_pread;
 };
-
-#endif

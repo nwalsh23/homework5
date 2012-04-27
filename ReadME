@@ -1,0 +1,7 @@
+README
+
+1. This is good use of object oriented design because this program takes into account parent and child processes and does a read and write.
+
+2. One way would be to include different case statements to filter the different outputs.
+
+3. It is possible that another case would be put to to ensure that the child terminates only when the parents suggests it. Also if the process value is stored into a temporary string and then read by the parent, this would allow for the data to be preserved.  
